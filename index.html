@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Avec Sans</title>
+  <title>Avec Sans — Clues on How to Human</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@900&family=Silkscreen&display=swap');
 
@@ -31,47 +31,14 @@
 
     body { display: grid; place-items: center; position: relative; }
 
-    /* ── PRELOADER ────────────────────────────────────────────── */
+    /* ── GRID PAPER TEXTURE ───────────────────────────────────── */
 
-    #preloader {
-      position: fixed; inset: 0;
-      background: var(--bg);
-      z-index: 200;
-      display: grid; place-items: center;
-      clip-path: inset(0 0 0 0);
-      transition: clip-path 0.5s steps(8);
-    }
-    #preloader.exit { clip-path: inset(0 0 100% 0); pointer-events: none; }
-
-    .pre-sym {
-      font-family: 'Unbounded', sans-serif;
-      font-weight: 900;
-      font-size: 28vw;
-      line-height: 1;
-      background: linear-gradient(135deg, #ff0090, #ffee00, #c8ff00, #00ffee, #9000ff, #ff0090);
-      background-size: 400% 400%;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      animation: gradShift 0.7s linear infinite;
-    }
-
-    .pre-txt {
-      font-size: 11px;
-      letter-spacing: 0.5em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.35);
-      text-align: center;
-      margin-top: 1.8rem;
-      animation: blink 0.5s step-end infinite;
-    }
-
-    @keyframes blink { 50% { opacity: 0; } }
-
-    @keyframes gradShift {
-      0%   { background-position: 0% 50%; }
-      50%  { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+    #grid {
+      position: fixed; inset: 0; z-index: 1; pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 40px 40px;
     }
 
     /* ── GRAIN ────────────────────────────────────────────────── */
@@ -104,6 +71,56 @@
       pointer-events: none; z-index: 24;
     }
 
+    /* ── PRELOADER ────────────────────────────────────────────── */
+
+    #preloader {
+      position: fixed; inset: 0;
+      background: var(--bg);
+      z-index: 200;
+      display: grid; place-items: center;
+      clip-path: inset(0 0 0 0);
+      transition: clip-path 0.5s steps(8);
+    }
+    #preloader.exit { clip-path: inset(0 0 100% 0); pointer-events: none; }
+
+    .pre-inner { text-align: center; }
+
+    .pre-clue {
+      font-size: 10px; letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+      margin-bottom: 1.2rem;
+      animation: blink 0.6s step-end infinite;
+    }
+
+    .pre-sym {
+      font-family: 'Unbounded', sans-serif;
+      font-weight: 900;
+      font-size: min(28vw, 28vh);
+      line-height: 1;
+      background: linear-gradient(135deg, #ff0090, #ffee00, #c8ff00, #00ffee, #9000ff, #ff0090);
+      background-size: 400% 400%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: gradShift 0.7s linear infinite;
+    }
+
+    .pre-sub {
+      font-size: 8px; letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.18);
+      margin-top: 1.4rem;
+    }
+
+    @keyframes blink { 50% { opacity: 0; } }
+
+    @keyframes gradShift {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
     /* ── BACKGROUND ORBS ──────────────────────────────────────── */
 
     .orb { position: fixed; border-radius: 50%; filter: blur(130px); pointer-events: none; z-index: 0; }
@@ -126,9 +143,9 @@
     .mq { position: fixed; left: 0; width: 100%; overflow: hidden; z-index: 10; pointer-events: none; }
     .mq-top    { top: 1.5rem; }
     .mq-bottom { bottom: 1.5rem; }
-    .mq-inner  { display: flex; white-space: nowrap; animation: mq 15s linear infinite; }
-    .mq-bottom .mq-inner { animation-direction: reverse; animation-duration: 20s; }
-    .mq span { font-size: 9px; letter-spacing: 0.32em; text-transform: uppercase; color: rgba(255,255,255,0.17); padding-right: 2em; }
+    .mq-inner  { display: flex; white-space: nowrap; animation: mq 18s linear infinite; }
+    .mq-bottom .mq-inner { animation-direction: reverse; animation-duration: 24s; }
+    .mq span { font-size: 8px; letter-spacing: 0.32em; text-transform: uppercase; color: rgba(255,255,255,0.15); padding-right: 2em; }
     @keyframes mq { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
     /* ── CENTRE ───────────────────────────────────────────────── */
@@ -136,19 +153,20 @@
     .centre {
       position: relative; z-index: 5;
       display: flex; align-items: center; justify-content: center;
+      flex-direction: column;
       opacity: 0;
-      transition: opacity 1.2s 1.3s var(--ease-out);
+      transition: opacity 1.2s 1.5s var(--ease-out);
     }
     .centre.visible { opacity: 1; }
 
-    /* spinning SVG text ring */
+    /* spinning text ring */
     .ring {
       position: absolute;
       width: min(94vw, 94vh);
       height: min(94vw, 94vh);
-      animation: spin 24s linear infinite;
+      animation: spin 28s linear infinite;
     }
-    .ring text { font-family: 'Silkscreen', monospace; font-size: 10px; letter-spacing: 3px; fill: rgba(255,255,255,0.2); }
+    .ring text { font-family: 'Silkscreen', monospace; font-size: 9.5px; letter-spacing: 2.5px; fill: rgba(255,255,255,0.18); }
     @keyframes spin { to { transform: rotate(360deg); } }
 
     /* ± */
@@ -157,7 +175,7 @@
     .symbol {
       font-family: 'Unbounded', sans-serif;
       font-weight: 900;
-      font-size: min(82vw, 86vh);
+      font-size: min(82vw, 80vh);
       line-height: 0.88;
       display: block;
       user-select: none;
@@ -178,13 +196,42 @@
       position: absolute; top: 0; left: 0;
       font-family: 'Unbounded', sans-serif;
       font-weight: 900;
-      font-size: min(82vw, 86vh);
+      font-size: min(82vw, 80vh);
       line-height: 0.88;
       pointer-events: none;
       will-change: transform, opacity;
     }
     .sym-r { color: var(--pink); mix-blend-mode: screen; }
     .sym-c { color: var(--cyan); mix-blend-mode: screen; }
+
+    /* ── TAGLINE BELOW SYMBOL ─────────────────────────────────── */
+
+    #tagline {
+      margin-top: 1.4rem;
+      font-size: 9px;
+      letter-spacing: 0.42em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.22);
+      text-align: center;
+      position: relative; z-index: 6;
+    }
+
+    #tagline .hi { color: var(--lime); }
+
+    /* ── CORNER CLUES ─────────────────────────────────────────── */
+
+    .corner {
+      position: fixed; font-size: 7px;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      color: rgba(255,255,255,0.14); z-index: 10;
+      pointer-events: none; line-height: 2;
+    }
+    .tl { top: 3.5rem; left: 1.5rem; }
+    .tr { top: 3.5rem; right: 1.5rem; text-align: right; }
+    .bl { bottom: 3.5rem; left: 1.5rem; }
+    .br { bottom: 3.5rem; right: 1.5rem; text-align: right; }
+
+    .corner .clue-num { color: var(--pink); opacity: 0.6; }
 
     /* ── SPARKLES ─────────────────────────────────────────────── */
 
@@ -207,17 +254,6 @@
       mix-blend-mode: difference;
     }
 
-    /* ── CORNERS ──────────────────────────────────────────────── */
-
-    .corner {
-      position: fixed; font-size: 7px;
-      letter-spacing: 0.15em; text-transform: uppercase;
-      color: rgba(255,255,255,0.13); z-index: 10;
-      pointer-events: none; line-height: 1.9;
-    }
-    .tl { top: 3.5rem; left: 1.5rem; }
-    .br { bottom: 3.5rem; right: 1.5rem; text-align: right; }
-
     @media (prefers-reduced-motion: reduce) {
       .symbol, .ring, .o1, .o2, .o3, .o4, body::before { animation: none; }
     }
@@ -226,11 +262,15 @@
 <body>
 
   <div id="preloader">
-    <div class="pre-sym">±</div>
-    <div class="pre-txt">Loading</div>
+    <div class="pre-inner">
+      <div class="pre-clue">Clue 001 — initialising</div>
+      <div class="pre-sym">±</div>
+      <div class="pre-sub">Instructions enclosed</div>
+    </div>
   </div>
 
   <div id="flash"></div>
+  <div id="grid"></div>
 
   <div class="orb o1"></div>
   <div class="orb o2"></div>
@@ -248,30 +288,34 @@
         <path id="rp" d="M 150,150 m -114,0 a 114,114 0 1,1 228,0 a 114,114 0 1,1 -228,0"/>
       </defs>
       <text>
-        <textPath href="#rp" startOffset="0%">AVEC SANS ✦ COMING SOON ✦ AVEC SANS ✦ COMING SOON ✦ AVEC SANS ✦ COMING SOON ✦ AVEC SANS ✦ COMING SOON ✦</textPath>
+        <textPath href="#rp" startOffset="0%">CLUE 01: AVEC SANS ✦ CLUE 02: ??? ✦ CLUE 03: [REDACTED] ✦ CLUE 04: SEE INSIDE ✦ CLUE 05: AVEC SANS ✦ CLUE 06: ??? ✦ CLUE 07: [REDACTED] ✦ CLUE 08: SEE INSIDE ✦</textPath>
       </text>
     </svg>
 
     <div id="wrap">
-      <span class="symbol" aria-label="Plus-minus, Avec Sans symbol">±</span>
+      <span class="symbol" id="sym" aria-label="Plus-minus, Avec Sans symbol">±</span>
       <span class="sym-r" id="sym-r" aria-hidden="true">±</span>
       <span class="sym-c" id="sym-c" aria-hidden="true">±</span>
     </div>
   </div>
 
-  <span class="corner tl">Avec<br>Sans</span>
-  <span class="corner br">MMXXVI</span>
+  <div id="tagline">Instructions enclosed &mdash; <span class="hi">clues on how to human</span></div>
+
+  <span class="corner tl">Avec Sans<br><span class="clue-num">HUM-001</span></span>
+  <span class="corner tr"><span class="clue-num">HUM-002</span><br>New album</span>
+  <span class="corner bl"><span class="clue-num">HUM-003</span><br>MMXXVI</span>
+  <span class="corner br">See inside<br><span class="clue-num">HUM-004</span></span>
 
   <script>
     // ── PRELOADER ──
     setTimeout(() => {
       document.getElementById('preloader').classList.add('exit');
       document.getElementById('centre').classList.add('visible');
-    }, 1600);
+    }, 1800);
 
     // ── MARQUEES ──
-    const T = 'AVEC SANS ✦ ± ✦ AVEC SANS ✦ ± ✦ AVEC SANS ✦ ± ✦ ';
-    const B = 'COMING SOON ✦ ± ✦ COMING SOON ✦ ± ✦ COMING SOON ✦ ± ✦ ';
+    const T = 'AVEC SANS ✦ CLUE 01: ± ✦ CLUE 02: ??? ✦ CLUE 03: [REDACTED] ✦ ';
+    const B = 'CLUES ON HOW TO HUMAN ✦ ± ✦ SEE INSIDE ✦ INSTRUCTIONS ENCLOSED ✦ ';
     function fillMq(id, txt) {
       const r = txt.repeat(5);
       document.getElementById(id).innerHTML =
@@ -288,7 +332,7 @@
     });
 
     // ── SPARKLES ──
-    const SYMS = ['✦','✧','★','◆','✕','×','+','✶','·'];
+    const SYMS = ['✦','✧','★','◆','?','!','+','±','·'];
     const COLS = ['#ff0090','#c8ff00','#00ffee','#9000ff','#ffee00','#ff4400','#ffffff'];
     let lastSpk = 0;
 
@@ -299,7 +343,7 @@
       el.style.color    = COLS[Math.floor(Math.random() * COLS.length)];
       el.style.left     = x + 'px';
       el.style.top      = y + 'px';
-      el.style.fontSize = (8 + Math.random() * 12) * scale + 'px';
+      el.style.fontSize = (7 + Math.random() * 11) * scale + 'px';
       el.style.setProperty('--tx',  (Math.random() * 80 - 40) + 'px');
       el.style.setProperty('--ty',  (Math.random() * 80 - 40) + 'px');
       el.style.setProperty('--rot', Math.random() * 360 + 'deg');
@@ -315,8 +359,7 @@
       spawn(e.clientX, e.clientY);
     });
 
-    // Ambient sparkles
-    setInterval(() => spawn(Math.random() * innerWidth, Math.random() * innerHeight, 0.75), 420);
+    setInterval(() => spawn(Math.random() * innerWidth, Math.random() * innerHeight, 0.7), 450);
 
     // ── PARALLAX ──
     const wrap = document.getElementById('wrap');
@@ -327,12 +370,16 @@
     });
 
     // ── GLITCH ENGINE ──
+    const sym   = document.getElementById('sym');
     const symR  = document.getElementById('sym-r');
     const symC  = document.getElementById('sym-c');
     const flash = document.getElementById('flash');
     let glitching = false;
     const rand = (a, b) => a + Math.random() * (b - a);
     const FC   = ['#ff0090','#c8ff00','#00ffee','#9000ff','#ffee00'];
+
+    // Symbols that flicker into during extreme glitch
+    const ALT_SYMS = ['?','!','±','∓','×','÷','∞'];
 
     function gFrame(intensity) {
       const s = 15 * intensity;
@@ -348,6 +395,18 @@
       ];
       symR.style.clipPath = clips[Math.floor(Math.random() * clips.length)];
       symC.style.clipPath = clips[Math.floor(Math.random() * clips.length)];
+
+      // Occasionally flicker the main symbol to an alt character
+      if (intensity > 1.8 && Math.random() < 0.3) {
+        sym.textContent = ALT_SYMS[Math.floor(Math.random() * ALT_SYMS.length)];
+        symR.textContent = sym.textContent;
+        symC.textContent = sym.textContent;
+        setTimeout(() => {
+          sym.textContent = '±';
+          symR.textContent = '±';
+          symC.textContent = '±';
+        }, 60 + Math.random() * 80);
+      }
     }
 
     function resetGlitch() {
@@ -376,10 +435,10 @@
 
     const centre = document.getElementById('centre');
     centre.addEventListener('mouseenter', () => triggerGlitch(1.5));
-    centre.addEventListener('click',      () => triggerGlitch(3));
+    centre.addEventListener('click',      () => triggerGlitch(3.5));
 
     (function sched() {
-      setTimeout(() => { triggerGlitch(rand(0.7, 1.4)); sched(); }, rand(2500, 7000));
+      setTimeout(() => { triggerGlitch(rand(0.7, 1.5)); sched(); }, rand(2500, 7000));
     })();
 
     resetGlitch();
